@@ -1,0 +1,519 @@
+{
+	"info": {
+		"_postman_id": "3171b6bf-8d4b-4440-a6e2-31dc48618e6d",
+		"name": "Simple API Mode",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42386066"
+	},
+	"item": [
+		{
+			"name": "All items list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/simpleapi/items?type=cd",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"simpleapi",
+						"items"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "cd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Random ISBN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const randomNumISBN = pm.response.text()",
+							"console.log(\"Random Num ISBN is = \",randomNumISBN)",
+							"",
+							"pm.collectionVariables.set(\"randomISBN\", randomNumISBN);",
+							"",
+							"pm.test(\"Random ISBN is saved as a collection variable\", () => {",
+							"    pm.expect(pm.collectionVariables.get(\"randomISBN\")).to.eql(randomNumISBN)",
+							"});",
+							"",
+							"console.log(\"Value of random ISBN in collection variable: \",pm.collectionVariables.get(\"randomISBN\"))"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/simpleapi/randomisbn",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"simpleapi",
+						"randomisbn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"const response = pm.response.json()",
+							"const numStock = response.numberinstock",
+							"",
+							"console.log(numStock)",
+							"",
+							"pm.collectionVariables.set(\"id\",response.id)",
+							"",
+							"//Value must be an Integer of min 0 and max 100.",
+							"pm.test(\"ID is saved in collection variable\", () =>{",
+							"    pm.expect(pm.collectionVariables.get(\"id\")).to.eql(response.id)",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"type\": \"cd\",\n  \"isbn13\": \"{{randomISBN}}\",\n  \"price\": 97.99,\n  \"numberinstock\": 76\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/simpleapi/items",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"simpleapi",
+						"items"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Options for endpoint",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/simpleapi/items",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"simpleapi",
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Headers for All Item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "HEAD",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/simpleapi/items",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"simpleapi",
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get single ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/simpleapi/items/:id",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"simpleapi",
+						"items",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Amend a Specific item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"type\": \"cd\",\n  \"isbn13\": \"{{randomISBN}}\",\n  \"price\": {{$randomPrice}},\n  \"numberinstock\": 19\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/simpleapi/items/:id",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"simpleapi",
+						"items",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Amend a Specific item_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  //\"type\": \"dvd\",\n  //\"isbn13\": \"123-4-56-789012-4\",\n  \"price\": \"{{$randomPrice}}\",\n  \"numberinstock\": 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/simpleapi/items/:id",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"simpleapi",
+						"items",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Options for single ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/simpleapi/items/:id",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"simpleapi",
+						"items",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Headers for All Item Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "HEAD",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/simpleapi/items/:id",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"simpleapi",
+						"items",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/simpleapi/items/:id",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"simpleapi",
+						"items",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseURL",
+			"value": "https://apichallenges.eviltester.com",
+			"type": "default"
+		},
+		{
+			"key": "randomISBN",
+			"value": ""
+		},
+		{
+			"key": "id",
+			"value": ""
+		}
+	]
+}
