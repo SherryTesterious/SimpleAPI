@@ -8,4 +8,4 @@ Hello 👋 and welcome to this practice on writing API tests with Postman.
 
 * [📚 Herokuapp SimpleAPI Practice](https://apichallenges.herokuapp.com/practice-modes/simpleapi)
 * [📚 Simple Books API documentation](./Simple%20API.md)
-* [📝 Swagger File](./Simple%API%Mode.postman_collection.json)
+* [📝 Swagger File](./Simple%20API%20Mode.postman_collection.json)
