@@ -1,0 +1,336 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Simple API Mode",
+    "description" : "A simple API, no auth protection so you can add and delete what you want in a multi-user mode.",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://apichallenges.eviltester.com",
+    "description" : "cloud hosted version"
+  }, {
+    "url" : "http://localhost:4567",
+    "description" : "local execution"
+  } ],
+  "paths" : {
+    "/simpleapi/items" : {
+      "get" : {
+        "summary" : "return all the instances of item",
+        "description" : "return all the instances of item",
+        "responses" : {
+          "200" : {
+            "description" : "All the items",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/items"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/items"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "we should be able to create item without a ID using the field values in the body of the message. A maximum of 100 items is allowed.",
+        "description" : "we should be able to create item without a ID using the field values in the body of the message. A maximum of 100 items is allowed.",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/create_item"
+              }
+            },
+            "application/xml" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/create_item"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Created a item",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/item"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/item"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Error when creating a item"
+          }
+        }
+      },
+      "options" : {
+        "summary" : "show all Options for endpoint of /simpleapi/items",
+        "description" : "show all Options for endpoint of /simpleapi/items",
+        "responses" : {
+          "204" : {
+            "description" : "the endpoint verb options"
+          }
+        }
+      },
+      "head" : {
+        "summary" : "headers for all the instances of item",
+        "description" : "headers for all the instances of item",
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/simpleapi/items/{id}" : {
+      "get" : {
+        "summary" : "return a specific instances of item using a id",
+        "description" : "return a specific instances of item using a id",
+        "responses" : {
+          "200" : {
+            "description" : "A specific item",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/item"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/item"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Could not find a specific item"
+          }
+        }
+      },
+      "put" : {
+        "summary" : "amend a specific instances of item using a id with a body containing the fields to amend",
+        "description" : "amend a specific instances of item using a id with a body containing the fields to amend",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/item"
+              }
+            },
+            "application/xml" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/item"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Replaced the specific item details",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/item"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/item"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Could not find a specific item"
+          }
+        }
+      },
+      "post" : {
+        "summary" : "amend a specific instances of item using a id with a body containing the fields to amend",
+        "description" : "amend a specific instances of item using a id with a body containing the fields to amend",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/item"
+              }
+            },
+            "application/xml" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/item"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Amended the specific item",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/item"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/item"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Could not find a specific item"
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "delete a specific instances of item using a id",
+        "description" : "delete a specific instances of item using a id",
+        "responses" : {
+          "200" : {
+            "description" : "Deleted a specific item"
+          },
+          "404" : {
+            "description" : "Could not find a specific item"
+          }
+        }
+      },
+      "options" : {
+        "summary" : "show all Options for endpoint of /simpleapi/items/:id",
+        "description" : "show all Options for endpoint of /simpleapi/items/:id",
+        "responses" : {
+          "204" : {
+            "description" : "OK, No Content"
+          }
+        }
+      },
+      "head" : {
+        "summary" : "headers for a specific instances of item using a id",
+        "description" : "headers for a specific instances of item using a id",
+        "responses" : {
+          "200" : {
+            "description" : "Headers for a specific item"
+          },
+          "404" : {
+            "description" : "Could not find a specific item"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "integer"
+        },
+        "example" : "22"
+      } ]
+    },
+    "/simpleapi/randomisbn" : {
+      "get" : {
+        "summary" : "return a random ISBN that can be used for testing purposes with the Simple API.",
+        "description" : "return a random ISBN that can be used for testing purposes with the Simple API.",
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "item" : {
+        "type" : "object",
+        "description" : "item",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "description" : "Field is an ID and should not be amended or set.",
+            "example" : "70"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "Value must be an Enum (cd, dvd, book, blu-ray) value. Value is mandatory.",
+            "example" : "cd"
+          },
+          "isbn13" : {
+            "type" : "string",
+            "description" : "Value is mandatory. Value must match the regex [0-9]{3}[-]?[0-9]{1}[-]?[0-9]{2}[-]?[0-9]{6}[-]?[0-9]{1}. Maximum length allowed is 17.",
+            "example" : "123-4-56-789012-3"
+          },
+          "price" : {
+            "type" : "number",
+            "description" : "Value must be a Float of min 0.000000 and max 50000.000000. Value is mandatory.",
+            "example" : "97.99"
+          },
+          "numberinstock" : {
+            "type" : "integer",
+            "description" : "Value must be an Integer of min 0 and max 100.",
+            "example" : "0"
+          }
+        },
+        "title" : "item",
+        "xml" : {
+          "name" : "item",
+          "wrapped" : true
+        }
+      },
+      "create_item" : {
+        "type" : "object",
+        "description" : "item",
+        "properties" : {
+          "type" : {
+            "type" : "string",
+            "description" : "Value must be an Enum (cd, dvd, book, blu-ray) value. Value is mandatory.",
+            "example" : "cd"
+          },
+          "isbn13" : {
+            "type" : "string",
+            "description" : "Value is mandatory. Value must match the regex [0-9]{3}[-]?[0-9]{1}[-]?[0-9]{2}[-]?[0-9]{6}[-]?[0-9]{1}. Maximum length allowed is 17.",
+            "example" : "123-4-56-789012-3"
+          },
+          "price" : {
+            "type" : "number",
+            "description" : "Value must be a Float of min 0.000000 and max 50000.000000. Value is mandatory.",
+            "example" : "97.99"
+          },
+          "numberinstock" : {
+            "type" : "integer",
+            "description" : "Value must be an Integer of min 0 and max 100.",
+            "example" : "0"
+          }
+        },
+        "title" : "create item",
+        "xml" : {
+          "name" : "item",
+          "wrapped" : true
+        }
+      },
+      "items" : {
+        "type" : "array",
+        "description" : "items",
+        "items" : {
+          "$ref" : "#/components/schemas/item"
+        },
+        "title" : "items",
+        "xml" : {
+          "wrapped" : true
+        }
+      }
+    }
+  }
+}
