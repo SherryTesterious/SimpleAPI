@@ -6,6 +6,8 @@ This repository showcases my first **Postman API testing practice** where I’ve
 
 While I’m in the process of building up my Postman skills, this repository demonstrates my dedication to learning and my ability to apply **best practices** in API testing.
 
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/42386066-446d919b-4cb5-4f22-8ff6-e5567c729ad1?action=collection%2Ffork&collection-url=entityId%3D42386066-446d919b-4cb5-4f22-8ff6-e5567c729ad1%26entityType%3Dcollection%26workspaceId%3Da2538527-6add-4774-8b93-a1999b5324fb)
+
 ### What I’ve Learned:
 
 <details>
